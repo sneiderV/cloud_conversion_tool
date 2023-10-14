@@ -45,13 +45,13 @@ class VistaLogIn(Resource):
             return {'message': 'Correo electrónico/usuario y contraseña son obligatorios'}, 400
 
         usuario = None
-        contrasena_encriptada = hashlib.md5(data.get["contrasena"].encode('utf-8')).hexdigest()
+        contrasena_encriptada = hashlib.md5(request.json["contrasena"].encode('utf-8')).hexdigest()
 
         if esCorreoElectronico(data.get('usuario')):
-            usuario = Usuario.query.filter(Usuario.correo_electronico == data.get["usuario"],
+            usuario = Usuario.query.filter(Usuario.correo_electronico == data["usuario"],
                                        Usuario.contrasena == contrasena_encriptada).first()
         else:
-            usuario = Usuario.query.filter(Usuario.usuario == data.get["usuario"],
+            usuario = Usuario.query.filter(Usuario.usuario == data["usuario"],
                                        Usuario.contrasena == contrasena_encriptada).first()
             
         if usuario is None:
