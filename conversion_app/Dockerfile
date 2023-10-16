@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM python:3.11
+FROM python:3.11-slim
 
 # Set the working directory in the container to /app
 WORKDIR /conversion_app
@@ -12,7 +12,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Set environment variables
-ENV FLASK_APP="conversion_app"
+#ENV FLASK_APP="conversion_app"
 ENV FLASK_DEBUG=1
 
 # Expose port 9876 for the Flask development server to listen on

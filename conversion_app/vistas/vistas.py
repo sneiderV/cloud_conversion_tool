@@ -4,9 +4,8 @@ from flask_restful import Resource
 import hashlib
 import re
 
-from conversion_app.modelos import \
-    db, \
-    Usuario
+from app import db
+from modelos import Usuario
 
 def esCorreoElectronico(texto):
     # Definimos una expresión regular para validar direcciones de correo electrónico
