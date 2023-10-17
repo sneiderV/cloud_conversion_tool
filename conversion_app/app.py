@@ -9,7 +9,7 @@ app = Flask(__name__, instance_relative_config=True)
 
 # Configuración de la aplicación desde el archivo config.py
 try:
-    app.config.from_pyfile('config.py')
+    app.config.from_pyfile('./instance/config.py')
 except FileNotFoundError:
     print("ERROR FILENOTFOUND")
     #pass
