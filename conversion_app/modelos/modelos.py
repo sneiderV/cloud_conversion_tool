@@ -57,12 +57,13 @@ class EnumADiccionario(fields.Field):
 class TaskSchema(ma.Schema):
     status = EnumADiccionario(attribute=("status"))
     class Meta:
-        field = ("id", "idFile", "status")
-        # model = Task
-        # include_relationships = True
-        # load_instance = True
-        # include_fk = True
+        model = Task
+        include_relationships = True
+        load_instance = True
+        include_fk = True
         
-    #id = fields.String()
-    #idFile = fields.String()
+    id = fields.Integer()
+    idFile = fields.Integer()
+    uploadTime = fields.DateTime()
+    userId = fields.Integer()
 

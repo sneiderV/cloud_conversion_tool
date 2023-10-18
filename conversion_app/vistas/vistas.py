@@ -78,11 +78,10 @@ class VistaLogIn(Resource):
 
 class VistaTasks(Resource):
 
-    @jwt_required
+    @jwt_required()
     def get(self):
-        return "hola"
-        #tareas = Task.query.all()
-        """ # Aplica parámetros de consulta, si están presentes
+        tareas = Task.query.all()
+        # Aplica parámetros de consulta, si están presentes
         max_param = request.args.get('max', type=int)
         order_param = request.args.get('order', type=int)
 
@@ -98,7 +97,7 @@ class VistaTasks(Resource):
             
 
         return [task_schema.dump(tarea) for tarea in tareas]
-     """
+    
 
     @jwt_required()
     def post(self):
