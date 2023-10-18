@@ -1,13 +1,17 @@
 import logging
 from flask import request
-from flask_jwt_extended import jwt_required, create_access_token
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from flask_restful import Resource
 import hashlib
 import re
 from celery import Celery
+import datetime
 
 from app import db
-from modelos import Usuario
+from modelos import Usuario, Task, TaskSchema, File
+
+
+task_schema = TaskSchema()
 
 celery = Celery(__name__, broker='redis://redis:6379/0')
 
@@ -20,6 +24,14 @@ def esCorreoElectronico(texto):
         return True
     else:
         return False
+    
+def obtener_formato_archivo(ruta_archivo):
+        # Utiliza una expresión regular para extraer la extensión del archivo
+        formato = re.search(r'\.([a-zA-Z0-9]+)$', ruta_archivo)
+        if formato:
+            return formato.group(1)
+        else:
+            return "Desconocido"  # Si no se encuentra una extensión
 
 
 class VistaSignIn(Resource):
@@ -65,22 +77,65 @@ class VistaLogIn(Resource):
 
 
 class VistaTasks(Resource):
+
+    @jwt_required
+    def get(self):
+        return "hola"
+        #tareas = Task.query.all()
+        """ # Aplica parámetros de consulta, si están presentes
+        max_param = request.args.get('max', type=int)
+        order_param = request.args.get('order', type=int)
+
+        # Verifica si se proporcionó el parámetro 'max' y lo utiliza para limitar la cantidad de registros
+        if max_param is not None:
+            tareas = tareas[:max_param]
+        
+        # Verifica si se proporcionó el parámetro 'order' y lo utiliza para ordenar las tareas
+        if order_param == 1:
+            tareas = sorted(tareas, key=lambda tarea: tarea.uploadTime, reverse=True)
+        elif order_param == 0:
+            tareas = sorted(tareas, key=lambda tarea: tarea.uploadTime)
+            
+
+        return [task_schema.dump(tarea) for tarea in tareas]
+     """
+
+    @jwt_required()
+    def post(self):
+        current_user = get_jwt_identity()
+        fileName = request.json["fileName"]
+        filePath = request.json["filePath"]
+        originalFormat = obtener_formato_archivo(filePath)
+        newFormat = request.json["newFormat"]
+        status="UPLOADED"
+        uploadTime = datetime.datetime.now()
+
+        new_file = File(fileName=fileName,filePath=filePath, originalFormat=originalFormat,newFormat=newFormat)
+        db.session.add(new_file)
+        db.session.commit()
+
+        new_task = Task(idFile=new_file.id,status=status,uploadTime=uploadTime,userId=current_user)
+
+        db.session.add(new_task)
+        db.session.commit()
+
+        return "Su transaccion esta en proceso"
+
+class VistaTask(Resource):
+    @jwt_required()
+    def get(self, id_task):
+        return task_schema.dump(Task.query.get_or_404(id_task))
+    
+    @jwt_required()
+    def delete(self, id_task):
+        registro = Task.query.get_or_404(id_task)
+        db.session.delete(registro)
+        db.session.commit()
+        return "Registro eliminado exitosamente"
+    
     
 
-    #please include annotation @jwt_required
-    def post(self):
-        id_usuario = request.json["usuario"]
-        print("PRINT ID USUARIO " + id_usuario)
-        logging.info("ID USUARIO " + id_usuario)
-        send_task_to_process.apply_async(args=[id_usuario], queue="process_task_converter")
-
-        '''  
-            return {"mensaje": "La tarea fue creada exitosamente", "id_tarea": nuevo_usuario.id}
-        else:
-            return "La tarea no fue creada", 404'''  
             
-            
-
 
 @celery.task(name="convert_process")
 def send_task_to_process(*args):
