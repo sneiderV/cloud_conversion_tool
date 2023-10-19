@@ -8,8 +8,11 @@ services:
       - web_net
     ports:
      - "9876:9876"
+    volumes:
+      - ./cct/files:/app/files
     depends_on: 
       - db
+      - redis
 
   db: 
     container_name: conversion_tool_pg_db
@@ -40,6 +43,8 @@ services:
     container_name: worker
     networks:
       - web_net
+    volumes:
+      - ./cct/files:/app/files
     depends_on: 
       - redis  
 

@@ -70,10 +70,16 @@ class VistaTasks(Resource):
     #please include annotation @jwt_required
     def post(self):
         id_usuario = request.json["usuario"]
+        
+        with  open('/app/files/hola.txt','r') as file:
+            data = file.read().replace('\n', '')
+    
         print("PRINT ID USUARIO " + id_usuario)
         logging.info("ID USUARIO " + id_usuario)
-        send_task_to_process.apply_async(args=[id_usuario], queue="process_task_converter")
+        #send_task_to_process.apply_async(args=[id_usuario], queue="process_task_converter")
 
+        return {"mensaje": "La tarea fue creada exitosamente", "contenido": data}
+    
         '''  
             return {"mensaje": "La tarea fue creada exitosamente", "id_tarea": nuevo_usuario.id}
         else:
