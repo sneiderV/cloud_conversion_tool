@@ -36,6 +36,7 @@ class Task(db.Model):
     idFile = db.Column(db.Integer, db.ForeignKey('file.id'))
     status = db.Column(db.Enum(Status))
     uploadTime = db.Column(db.TIMESTAMP)
+    url = db.Column(db.String, nullable=True)
     userId = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     file = db.relationship('File')
 
