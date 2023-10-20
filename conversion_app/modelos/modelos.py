@@ -42,7 +42,6 @@ class Task(db.Model):
 class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fileName = db.Column(db.String)
-    filePath = db.Column(db.String)
     originalFormat = db.Column(db.String)
     newFormat = db.Column(db.String)
     task = db.relationship('Task', back_populates='file')

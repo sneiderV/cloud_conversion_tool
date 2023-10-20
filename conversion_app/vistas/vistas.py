@@ -103,22 +103,19 @@ class VistaTasks(Resource):
     def post(self):
         current_user = get_jwt_identity()
         fileName = request.json["fileName"]
-        filePath = request.json["filePath"]
-        originalFormat = obtener_formato_archivo(filePath)
+        originalFormat = obtener_formato_archivo(fileName)
         newFormat = request.json["newFormat"]
         status="UPLOADED"
         uploadTime = datetime.datetime.now()
-
-        new_file = File(fileName=fileName,filePath=filePath, originalFormat=originalFormat,newFormat=newFormat)
+        new_file = File(fileName=fileName,originalFormat=originalFormat,newFormat=newFormat)
         db.session.add(new_file)
         db.session.commit()
-
         new_task = Task(idFile=new_file.id,status=status,uploadTime=uploadTime,userId=current_user)
-
         db.session.add(new_task)
         db.session.commit()
+        send_task_to_process.apply_async(args=[new_task.id,fileName,newFormat], queue="process_task_converter")
 
-        return "Su transaccion esta en proceso"
+        return "Su transaccion esta en proceso con el task_id: {}".format(new_task.id)
 
 class VistaTask(Resource):
     @jwt_required()
