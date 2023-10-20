@@ -80,7 +80,8 @@ class VistaTasks(Resource):
 
     @jwt_required()
     def get(self):
-        tareas = Task.query.all()
+        current_user = get_jwt_identity()
+        tareas = Task.query.filter(id=current_user)
         # Aplica parámetros de consulta, si están presentes
         max_param = request.args.get('max', type=int)
         order_param = request.args.get('order', type=int)
