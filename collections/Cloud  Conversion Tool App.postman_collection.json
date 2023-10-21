@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "597999f1-b7a8-4a97-8515-ed508a483742",
+		"name": "Cloud  Conversion Tool App",
+		"description": "**Cloud Conversion Tool App** es una aplicación web que ofrece a los usuarios la posibilidad de subir y transformar diversos formatos multimedia de archivos, así como llevar a cabo procesos de compresión de manera gratuita.  \n\n**Funcionamiento de la Aplicación**\n\nEl funcionamiento general de la aplicación se basa en la creación de una cuenta en el portal web y el acceso al administrador de archivos. Una vez se ha creado la cuenta, los usuarios pueden cargar archivos y solicitar la conversión de formato de estos para su posterior descarga. La aplicación web permite a los usuarios convertir archivos multimedia en línea de un formato a otro, seleccionando el formato de destino.\n\n**Formatos de Video Compatibles**\n\n- MP4\n    \n- WEBM\n    \n- AVI\n    \n- MPEG\n    \n- WMV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30660012",
+		"_collection_link": "https://grey-escape-212638.postman.co/workspace/757a3db0-a826-4dc7-8737-5ad1f78199bc/collection/30660012-597999f1-b7a8-4a97-8515-ed508a483742?action=share&source=collection_link&creator=30660012"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"santi@email.com\",\n    \"usuario\": \"santiago\",\n    \"password\": \"santy\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"{{IP_HOST}}"
+					],
+					"port": "{{PORT_HOST}}",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Endpoint de Login\n\nEste endpoint se utiliza para iniciar sesión en la aplicación Cloud Conversion Tool. Se requiere un token de autorización y se deben proporcionar las credenciales de inicio de sesión (correo electrónico y contraseña) en formato JSON."
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"santi@email.com\",\n    \"usuario\": \"santiago\",\n    \"password\": \"santy\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"{{IP_HOST}}"
+					],
+					"port": "{{PORT_HOST}}",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				},
+				"description": "**Endpoint de Registro  \n**Este endpoint se utiliza para registrar una nueva cuenta de usuario en la aplicación. Los datos del usuario, incluyendo el correo electrónico, nombre de usuario y contraseña, se envían en formato JSON."
+			},
+			"response": []
+		},
+		{
+			"name": "tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg1NDM1NSwianRpIjoiYjlhZjYwNGYtYjAwNS00ODliLTkwNDItNmI3ODUyNWUzMTE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODU0MzU1LCJleHAiOjE2OTc4NTUyNTV9.4_dXOs1v-Tg0zzrzbppLw1QT2Zp9XY7xO70V61sE-z0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks",
+					"protocol": "http",
+					"host": [
+						"{{IP_HOST}}"
+					],
+					"port": "{{PORT_HOST}}",
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "**Endpoint Obtener Tareas (Tasks)**\n\nEste endpoint permite obtener una lista de tareas. Es necesario proporcionar un token de autorización para acceder a esta funcionalidad."
+			},
+			"response": []
+		},
+		{
+			"name": "task by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg1NDM1NSwianRpIjoiYjlhZjYwNGYtYjAwNS00ODliLTkwNDItNmI3ODUyNWUzMTE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODU0MzU1LCJleHAiOjE2OTc4NTUyNTV9.4_dXOs1v-Tg0zzrzbppLw1QT2Zp9XY7xO70V61sE-z0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks/5",
+					"protocol": "http",
+					"host": [
+						"{{IP_HOST}}"
+					],
+					"port": "{{PORT_HOST}}",
+					"path": [
+						"api",
+						"tasks",
+						"5"
+					]
+				},
+				"description": "**Endpoint Obtener Tarea por ID**\n\nAl acceder a este endpoint con una identificación determinada, se obtiene información detallada sobre una tarea específica. Se requiere un token de autorización."
+			},
+			"response": []
+		},
+		{
+			"name": "task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg3Mjc3NiwianRpIjoiZDA2MWQ0NjctYTJhMS00NmE1LTgwNDQtNDEyYzEyNDEwYTUxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjk3ODcyNzc2LCJleHAiOjE2OTc4NzM2NzZ9.w1_3wlsvEoCK_ycPp-i_xdcEQQYkUMQfqBNN06c-vEg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fileName\":\"/app/files/base/video1.mp4\",\n    \"newFormat\":\"avi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks",
+					"protocol": "http",
+					"host": [
+						"{{IP_HOST}}"
+					],
+					"port": "{{PORT_HOST}}",
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "**Endpoint Crear Tarea (Task)  \n**Los usuarios pueden crear una nueva tarea para convertir un archivo multimedia a un nuevo formato. El cuerpo de la solicitud debe incluir el nombre del archivo y el formato al que se desea convertir."
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg2NDEyNCwianRpIjoiNzk0M2U0MDQtZjU0Zi00N2NhLTllN2UtNDFhNWM4NjY1ZDM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODY0MTI0LCJleHAiOjE2OTc4NjUwMjR9.XA4RPoSBbfhWiPb-I2I4NxMEyixXHGk-Ta80IWekHGg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks/17",
+					"protocol": "http",
+					"host": [
+						"{{IP_HOST}}"
+					],
+					"port": "{{PORT_HOST}}",
+					"path": [
+						"api",
+						"tasks",
+						"17"
+					]
+				},
+				"description": "**Endpoint Eliminar Tarea (Delete)**\n\nSe utiliza para eliminar una tarea específica en la aplicación. Para autorizar la eliminación de la tarea, se requiere un token de autorización. El cuerpo de la solicitud debe contener detalles sobre la tarea que se va a eliminar, incluyendo el nombre del archivo y el nuevo formato que se había especificado previamente."
+			},
+			"response": []
+		}
+	]
+}
