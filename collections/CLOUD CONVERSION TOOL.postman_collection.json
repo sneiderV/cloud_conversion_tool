@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "88c214a6-9ab5-49ad-8d58-d484db552b9c",
+		"name": "CLOUD CONVERSION TOOL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17356950",
+		"_collection_link": "https://martian-crescent-860563.postman.co/workspace/860b4c8f-7bd1-4871-8159-4e8b757f2344/collection/17356950-88c214a6-9ab5-49ad-8d58-d484db552b9c?action=share&source=collection_link&creator=17356950"
+	},
+	"item": [
+		{
+			"name": "localhost:9876/api/auth/login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NzE0NTk5OSwianRpIjoiYjRhOGMyYzAtM2Q1Yy00OGFmLWE0NWEtYjA0YTFhMzIxN2I1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFAYS5jb20iLCJuYmYiOjE2OTcxNDU5OTksImV4cCI6MTY5NzIzMjM5OX0.AZj2aH6gl9n9jV6CFQnJSXwTdRG6TkopBMI563-FnU0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"a@a.com\",\n    \"usuario\": \"andres\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9876/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9876",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9876/api/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"c@c.com\",\n    \"usuario\": \"berlin\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:9876/api/auth/signup",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9876",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9876/api/tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg1NDM1NSwianRpIjoiYjlhZjYwNGYtYjAwNS00ODliLTkwNDItNmI3ODUyNWUzMTE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODU0MzU1LCJleHAiOjE2OTc4NTUyNTV9.4_dXOs1v-Tg0zzrzbppLw1QT2Zp9XY7xO70V61sE-z0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9876/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9876",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9876/api/tasks/<id:string>",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg1NDM1NSwianRpIjoiYjlhZjYwNGYtYjAwNS00ODliLTkwNDItNmI3ODUyNWUzMTE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODU0MzU1LCJleHAiOjE2OTc4NTUyNTV9.4_dXOs1v-Tg0zzrzbppLw1QT2Zp9XY7xO70V61sE-z0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9876/api/tasks/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9876",
+					"path": [
+						"api",
+						"tasks",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9876/api/tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg1NDM1NSwianRpIjoiYjlhZjYwNGYtYjAwNS00ODliLTkwNDItNmI3ODUyNWUzMTE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODU0MzU1LCJleHAiOjE2OTc4NTUyNTV9.4_dXOs1v-Tg0zzrzbppLw1QT2Zp9XY7xO70V61sE-z0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fileName\":\"/app/files/video1.mp4\",\n    \"newFormat\":\"avi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9876/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9876",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -66,4 +66,5 @@ class TaskSchema(ma.Schema):
     idFile = fields.Integer()
     uploadTime = fields.DateTime()
     userId = fields.Integer()
+    url = fields.String()
 
