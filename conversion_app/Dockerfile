@@ -13,8 +13,8 @@ RUN pip install -r requirements.txt
 
 # Set environment variables
 #ENV FLASK_APP="conversion_app"
-ENV FLASK_DEBUG=1
-ENV FLASK_ENV=development
+#ENV FLASK_DEBUG=1
+#ENV FLASK_ENV=development
 
 # Expose port 9876 for the Flask development server to listen on
 EXPOSE 9876

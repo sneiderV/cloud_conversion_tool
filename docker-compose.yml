@@ -1,6 +1,7 @@
 version: "3.8"
 services: 
   conversion-tool-api:
+    restart: always
     build:
       context: ./conversion_app
     container_name: conversion_tool_api_app
