@@ -146,9 +146,9 @@ class VistaTask(Resource):
             db.session.delete(file)
             db.session.commit()
             
-            return "Registro eliminado exitosamente "+ f'_{output_video_path}'+  f'_{original_video_path}'
+            return "Registro eliminado exitosamente."
         else:
-            return "La tarea no puede ser eliminada. Tarea en proceso"+ f'_{output_video_path}'+  f'_{original_video_path}'
+            return "La tarea no puede ser eliminada. Tarea en proceso."
     
     
 
