@@ -60,7 +60,7 @@ La interacción de los componentes se presenta en el siguiente modelo, si desea 
 
 ______
 
-> Disponibilizamos [un servicio de registro](https://github.com/sneiderV/cloud_conversion_tool/issues/new/choose) de `Bugs` o `Features` del cual estaremos dispuestos a atender.
+>  Disponibilizamos [un servicio de registro](https://github.com/sneiderV/cloud_conversion_tool/issues/new/choose) de 🐞 `Bugs` o ✨ `Features` del cual estaremos dispuestos a atender.
 
 <img width="1700" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/2543836c-5ae2-4bb7-996b-824f098266e1">
 
