@@ -17,6 +17,10 @@ Formatos de Video Compatibles: MP4, WEBM, AVI, MPEG, WMV
 | `Redis` | Servidor de encolamiento. |
 | `Postgres` | Motor de base de datos. |
 
+La interacción de los componentes se presenta en el siguiente modelo, si desea revisar más documentación sobre la arquitectura de software lo invitamos a revisar la [wiki](https://github.com/sneiderV/cloud_conversion_tool/wiki) del proyecto
+
+<img width="500" alt="Modelo de despliegue" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/ad400dd2-5950-4511-8399-b687ee68acb1">
+
 ## ▶️ Ejecutando los componentes
 
 1. Descargar o clonar el repositorio
@@ -25,17 +29,18 @@ Formatos de Video Compatibles: MP4, WEBM, AVI, MPEG, WMV
     `cd cloud_conversion_tool`
 
 3. Localizar el archivo que tiene por nombre `docker-compose.yml` y ejecutar el comando `docker-compose up` y esperar mientras se descargan las imagenes de los recursos y se construyen los contenedores.
- <img width="386" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/a8bc8aca-27a5-416b-a2db-0003a5eea03b">
+
+   <img width="300" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/a8bc8aca-27a5-416b-a2db-0003a5eea03b">
  
-4. Visualizar la creación y ejecución activa de 4 contenedores.
+5. Visualizar la creación y ejecución activa de 4 contenedores.
    
    <img width="1326" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/2722c756-1fc5-4401-a884-8650fb12b6e6">
 
-5. En el folder `/collections` se encuentrar dos archivos `.json` que puede importar directamente en la aplicación Postman.
+6. En el folder `/collections` se encuentrar dos archivos `.json` que puede importar directamente en la aplicación Postman.
 
    También, tiene a disposición la [documentación](https://documenter.getpostman.com/view/30660012/2s9YRCVqp2) de la Api en el siguiente [link](https://documenter.getpostman.com/view/30660012/2s9YRCVqp2).
 
-   <img width="386" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/23e2cb9f-cd75-4cb2-94cd-971a6db2effd">
+   <img width="300" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/23e2cb9f-cd75-4cb2-94cd-971a6db2effd">
 
    Colección importada en Postman:
    
@@ -52,5 +57,11 @@ Formatos de Video Compatibles: MP4, WEBM, AVI, MPEG, WMV
    | 5 | Buscar tarea por id del usuario. | `task by id` |
    | 6 | Eliminar tarea. | `delete` |
    
+
+______
+
+> Disponibilizamos [un servicio de registro](https://github.com/sneiderV/cloud_conversion_tool/issues/new/choose) de `Bugs` o `Features` del cual estaremos dispuestos a atender.
+
+<img width="1700" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/2543836c-5ae2-4bb7-996b-824f098266e1">
 
 
