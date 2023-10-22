@@ -2,13 +2,19 @@
 # Cloud conversion tool 📀 📹📽️
 
 Cloud Conversion Tool App es una aplicación web que ofrece a los usuarios la posibilidad de subir y transformar diversos formatos multimedia de archivos, así como llevar a cabo procesos de compresión de manera gratuita.  
+
+Los formatos de conversión que maneja la aplicación son:
+- MP4 
+- WEBM 
+- AVI 
+- MPEG 
+- WMV
+
 Funcionamiento de la Aplicación
 El funcionamiento general de la aplicación se basa en la creación de una cuenta en el portal web y el acceso al administrador de archivos. Una vez se ha creado la cuenta, los usuarios pueden cargar archivos y solicitar la conversión 
 de formato de estos para su posterior descarga. La aplicación web permite a los usuarios convertir archivos multimedia en línea de un formato a otro, seleccionando el formato de destino.
 
-Formatos de Video Compatibles: MP4, WEBM, AVI, MPEG, WMV
-
-## 🏗️ Componentes del Sistema Cloud Conversion Tool  App
+## 🏗️ Componentes del Sistema Cloud Conversion Tool App
 
 | Componente  | Descripcion |
 | :---------: | ----------- |
@@ -27,16 +33,22 @@ La interacción de los componentes se presenta en el siguiente modelo, si desea 
 2. Abrir una terminal de comandos y dirigir el apuntamiento a la carpeta del proyecto
    
     `cd cloud_conversion_tool`
+   
+4. Crear un nuevo ambiente virtual `python3 -m venv nuevo_ambiente`, activarlo `source nuevo_ambiente/bin/activate`.
 
-3. Localizar el archivo que tiene por nombre `docker-compose.yml` y ejecutar el comando `docker-compose up` y esperar mientras se descargan las imagenes de los recursos y se construyen los contenedores.
+5. Instalar dependencias `pip install flask` , `pip install flask-restful`, `pip install flask-marshmallow`
+
+6. Configurar variables de entorno `export FLASK_APP=app.py`, `export FLASK_DEBUG=1`, `export FLASK_ENV=development`
+
+7. Localizar el archivo que tiene por nombre `docker-compose.yml` y ejecutar el comando `docker-compose up` y esperar mientras se descargan las imagenes de los recursos y se construyen los contenedores.
 
    <img width="300" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/a8bc8aca-27a5-416b-a2db-0003a5eea03b">
  
-5. Visualizar la creación y ejecución activa de 4 contenedores.
+8. Visualizar la creación y ejecución activa de 4 contenedores.
    
    <img width="1326" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/2722c756-1fc5-4401-a884-8650fb12b6e6">
 
-6. En el folder `/collections` se encuentrar dos archivos `.json` que puede importar directamente en la aplicación Postman.
+9. En el folder `/collections` se encuentrar dos archivos `.json` que puede importar directamente en la aplicación Postman.
 
    También, tiene a disposición la [documentación](https://documenter.getpostman.com/view/30660012/2s9YRCVqp2) de la Api en el siguiente [link](https://documenter.getpostman.com/view/30660012/2s9YRCVqp2).
 
