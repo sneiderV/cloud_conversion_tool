@@ -5,7 +5,7 @@
 		"description": "**Cloud Conversion Tool App** es una aplicación web que ofrece a los usuarios la posibilidad de subir y transformar diversos formatos multimedia de archivos, así como llevar a cabo procesos de compresión de manera gratuita.  \n\n**Funcionamiento de la Aplicación**\n\nEl funcionamiento general de la aplicación se basa en la creación de una cuenta en el portal web y el acceso al administrador de archivos. Una vez se ha creado la cuenta, los usuarios pueden cargar archivos y solicitar la conversión de formato de estos para su posterior descarga. La aplicación web permite a los usuarios convertir archivos multimedia en línea de un formato a otro, seleccionando el formato de destino.\n\n**Formatos de Video Compatibles**\n\n- MP4\n    \n- WEBM\n    \n- AVI\n    \n- MPEG\n    \n- WMV",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "30660012",
-		"_collection_link": "https://grey-escape-212638.postman.co/workspace/757a3db0-a826-4dc7-8737-5ad1f78199bc/collection/30660012-597999f1-b7a8-4a97-8515-ed508a483742?action=share&source=collection_link&creator=30660012"
+		"_collection_link": "https://grey-escape-212638.postman.co/workspace/MISO---Cloud~757a3db0-a826-4dc7-8737-5ad1f78199bc/collection/30660012-597999f1-b7a8-4a97-8515-ed508a483742?action=share&source=collection_link&creator=30660012"
 	},
 	"item": [
 		{
@@ -26,21 +26,142 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/auth/login",
+					"raw": "http://localhost:9876/api/auth/login",
 					"protocol": "http",
 					"host": [
-						"{{IP_HOST}}"
+						"localhost"
 					],
-					"port": "{{PORT_HOST}}",
+					"port": "9876",
 					"path": [
 						"api",
 						"auth",
 						"login"
 					]
 				},
-				"description": "Endpoint de Login\n\nEste endpoint se utiliza para iniciar sesión en la aplicación Cloud Conversion Tool. Se requiere un token de autorización y se deben proporcionar las credenciales de inicio de sesión (correo electrónico y contraseña) en formato JSON."
+				"description": "Endpoint de Login\n\nEste endpoint se utiliza para iniciar sesión en la aplicación Cloud Conversion Tool. Se requiere un token de autorización y se deben proporcionar las credenciales de inicio de sesión (correo electrónico y contraseña) en formato JSON.\n\nEn caso de ingresar un usuario con datos que no fueron creados previamente, se obtiene el mensaje \"El usuario con las credenciales proporcionadas no existe\""
 			},
-			"response": []
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"claudia@email.com\",\n    \"usuario\": \"claudia\",\n    \"password\": \"clau\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 01:56:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "328"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"mensaje\": \"Inicio de sesión exitoso\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NzkzOTc4OSwianRpIjoiNzQ5NTBhODUtMTAyMy00Y2ZkLWExMWMtNDA3OTIwMGVmNDcyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNjk3OTM5Nzg5LCJleHAiOjE2OTc5NDA2ODl9.JHq0XrC7h-cVJvwqvioDF0ZY_-jwiLPpHzHDFRFu_yk\",\n    \"id\": 3\n}"
+				},
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"inexistente@email.com\",\n    \"usuario\": \"inexistente\",\n    \"password\": \"inexistente\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "NOT FOUND",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 02:22:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"El usuario con las credenciales proporcionadas no existe\""
+				}
+			]
 		},
 		{
 			"name": "signup",
@@ -57,21 +178,142 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/auth/signup",
+					"raw": "http://localhost:9876/api/auth/signup",
 					"protocol": "http",
 					"host": [
-						"{{IP_HOST}}"
+						"localhost"
 					],
-					"port": "{{PORT_HOST}}",
+					"port": "9876",
 					"path": [
 						"api",
 						"auth",
 						"signup"
 					]
 				},
-				"description": "**Endpoint de Registro  \n**Este endpoint se utiliza para registrar una nueva cuenta de usuario en la aplicación. Los datos del usuario, incluyendo el correo electrónico, nombre de usuario y contraseña, se envían en formato JSON."
+				"description": "**Endpoint de Registro**\n\nEste endpoint se utiliza para registrar una nueva cuenta de usuario en la aplicación. Los datos del usuario, incluyendo el correo electrónico, nombre de usuario y contraseña, se envían en formato JSON.\n\nSi se crea un usuario con un correo o nombre de usuario previamente ingresado, obtendremos el mensaje \"El usuario o correo ya existe\""
 			},
-			"response": []
+			"response": [
+				{
+					"name": "signup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"claudia@email.com\",\n    \"usuario\": \"claudia\",\n    \"password\": \"clau\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "NOT FOUND",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 00:40:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"El usuario o correo ya existe\""
+				},
+				{
+					"name": "signup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"newuser@email.com\",\n    \"usuario\": \"newuser\",\n    \"password\": \"newuser\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 03:05:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"mensaje\": \"usuario creado exitosamente\",\n    \"id\": 4\n}"
+				}
+			]
 		},
 		{
 			"name": "tasks",
@@ -101,12 +343,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks",
+					"raw": "http://localhost:9876/api/tasks",
 					"protocol": "http",
 					"host": [
-						"{{IP_HOST}}"
+						"localhost"
 					],
-					"port": "{{PORT_HOST}}",
+					"port": "9876",
 					"path": [
 						"api",
 						"tasks"
@@ -114,7 +356,67 @@
 				},
 				"description": "**Endpoint Obtener Tareas (Tasks)**\n\nEste endpoint permite obtener una lista de tareas. Es necesario proporcionar un token de autorización para acceder a esta funcionalidad."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "tasks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 02:59:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "174"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"idFile\": 2,\n        \"url\": \"/app/files/converted/video1_2_3.avi\",\n        \"userId\": 3,\n        \"status\": {\n            \"llave\": \"PROCESSED\",\n            \"valor\": 2\n        },\n        \"id\": 2,\n        \"uploadTime\": \"2023-10-22T01:56:44.967701\"\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "task by id",
@@ -144,12 +446,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks/5",
+					"raw": "http://localhost:9876/api/tasks/5",
 					"protocol": "http",
 					"host": [
-						"{{IP_HOST}}"
+						"localhost"
 					],
-					"port": "{{PORT_HOST}}",
+					"port": "9876",
 					"path": [
 						"api",
 						"tasks",
@@ -158,7 +460,68 @@
 				},
 				"description": "**Endpoint Obtener Tarea por ID**\n\nAl acceder a este endpoint con una identificación determinada, se obtiene información detallada sobre una tarea específica. Se requiere un token de autorización."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "task by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 02:59:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "172"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"idFile\": 2,\n    \"url\": \"/app/files/converted/video1_2_3.avi\",\n    \"userId\": 3,\n    \"status\": {\n        \"llave\": \"PROCESSED\",\n        \"valor\": 2\n    },\n    \"id\": 2,\n    \"uploadTime\": \"2023-10-22T01:56:44.967701\"\n}"
+				}
+			]
 		},
 		{
 			"name": "task",
@@ -168,7 +531,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg3Mjc3NiwianRpIjoiZDA2MWQ0NjctYTJhMS00NmE1LTgwNDQtNDEyYzEyNDEwYTUxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjk3ODcyNzc2LCJleHAiOjE2OTc4NzM2NzZ9.w1_3wlsvEoCK_ycPp-i_xdcEQQYkUMQfqBNN06c-vEg",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -185,12 +548,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks",
+					"raw": "http://localhost:9876/api/tasks",
 					"protocol": "http",
 					"host": [
-						"{{IP_HOST}}"
+						"localhost"
 					],
-					"port": "{{PORT_HOST}}",
+					"port": "9876",
 					"path": [
 						"api",
 						"tasks"
@@ -198,7 +561,126 @@
 				},
 				"description": "**Endpoint Crear Tarea (Task)  \n**Los usuarios pueden crear una nueva tarea para convertir un archivo multimedia a un nuevo formato. El cuerpo de la solicitud debe incluir el nombre del archivo y el formato al que se desea convertir."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fileName\":\"/app/files/base/video1.mp4\",\n    \"newFormat\":\"avi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 03:00:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"Su transaccion esta en proceso con el task_id: 3\""
+				},
+				{
+					"name": "task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fileName\":\"/app/files/base/video1.mp4\",\n    \"newFormat\":\"mpeg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 03:06:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"Su transaccion esta en proceso con el task_id: 4\""
+				}
+			]
 		},
 		{
 			"name": "delete",
@@ -208,7 +690,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzg2NDEyNCwianRpIjoiNzk0M2U0MDQtZjU0Zi00N2NhLTllN2UtNDFhNWM4NjY1ZDM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk3ODY0MTI0LCJleHAiOjE2OTc4NjUwMjR9.XA4RPoSBbfhWiPb-I2I4NxMEyixXHGk-Ta80IWekHGg",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -225,21 +707,432 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{IP_HOST}}:{{PORT_HOST}}/api/tasks/17",
+					"raw": "http://localhost:9876/api/tasks/:id_task",
 					"protocol": "http",
 					"host": [
-						"{{IP_HOST}}"
+						"localhost"
 					],
-					"port": "{{PORT_HOST}}",
+					"port": "9876",
 					"path": [
 						"api",
 						"tasks",
-						"17"
+						":id_task"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "id_task",
+							"value": "11",
+							"type": "string"
+						}
 					]
 				},
 				"description": "**Endpoint Eliminar Tarea (Delete)**\n\nSe utiliza para eliminar una tarea específica en la aplicación. Para autorizar la eliminación de la tarea, se requiere un token de autorización. El cuerpo de la solicitud debe contener detalles sobre la tarea que se va a eliminar, incluyendo el nombre del archivo y el nuevo formato que se había especificado previamente."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "1. Eliminacion exitosa",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/:id_task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								":id_task"
+							],
+							"variable": [
+								{
+									"key": "id_task",
+									"value": "14",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Oct 2023 17:54:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"Registro eliminado exitosamente.\""
+				},
+				{
+					"name": "2. Eliminación restringida",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/:id_task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								":id_task"
+							],
+							"variable": [
+								{
+									"key": "id_task",
+									"value": "15",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Oct 2023 17:55:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"La tarea no puede ser eliminada. Tarea en proceso.\""
+				},
+				{
+					"name": "200 - delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/:id_task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								":id_task"
+							],
+							"variable": [
+								{
+									"id": 0,
+									"key": "id_task",
+									"value": "11",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Oct 2023 17:32:09 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"type": "text"
+						},
+						{
+							"key": "Connection",
+							"value": "close",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "\"Registro eliminado exitosamente.\""
+				},
+				{
+					"name": "200 - no delete by process status",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/:id_task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								":id_task"
+							],
+							"variable": [
+								{
+									"id": 0,
+									"key": "id_task",
+									"value": "12",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 21 Oct 2023 17:49:26 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"type": "text"
+						},
+						{
+							"key": "Connection",
+							"value": "close",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "\"La tarea no puede ser eliminada. Tarea en proceso.\""
+				},
+				{
+					"name": "delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 03:00:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"Registro eliminado exitosamente.\""
+				},
+				{
+					"name": "delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9876/api/tasks/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9876",
+							"path": [
+								"api",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.8.18"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 03:00:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "\"Registro eliminado exitosamente.\""
+				}
+			]
 		}
 	]
 }
