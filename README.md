@@ -11,7 +11,7 @@ Formatos de Video Compatibles: MP4, WEBM, AVI, MPEG, WMV
 ## 🏗️ Componentes del Sistema Cloud Conversion Tool  App
 
 | Componente  | Descripcion |
-| ----------- | ----------- |
+| :---------: | ----------- |
 | `conversion_app` | Aplicacion receptora de tareas para convertir archivos. |
 | `worker` | Procesador de tareas asincrono de los archivos del usuario pentiendes por atender. |
 | `Redis` | Servidor de encolamiento. |
@@ -36,7 +36,21 @@ Formatos de Video Compatibles: MP4, WEBM, AVI, MPEG, WMV
    También, tiene a disposición la [documentación](https://documenter.getpostman.com/view/30660012/2s9YRCVqp2) de la Api en el siguiente [link](https://documenter.getpostman.com/view/30660012/2s9YRCVqp2).
 
    <img width="386" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/23e2cb9f-cd75-4cb2-94cd-971a6db2effd">
+
+   Colección importada en Postman:
    
+   <img width="209" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/b0daf9f2-f996-4ee0-b7e3-8b26a7f08e60">
+
+   Recomendamos el siguiente orden de ejecución, para probar el sistema:
+   
+   | Paso  | Descripcion | Nombre Request |
+   | :---: | :---------: | :--------------:|
+   | 1 | Crear el usuario. | `signup` |
+   | 2 | Realizar login. | `login` |
+   | 3 | Crear tarea. | `task` |
+   | 4 | Listar tareas del usuario. | `tasks` |
+   | 5 | Buscar tarea por id del usuario. | `task by id` |
+   | 6 | Eliminar tarea. | `delete` |
    
 
 
