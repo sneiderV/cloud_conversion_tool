@@ -43,10 +43,13 @@ La interacción de los componentes se presenta en el siguiente modelo, si desea 
 7. Localizar el archivo que tiene por nombre `docker-compose.yml` y ejecutar el comando `docker-compose up` y esperar mientras se descargan las imagenes de los recursos y se construyen los contenedores.
 
    <img width="300" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/a8bc8aca-27a5-416b-a2db-0003a5eea03b">
+
  
 8. Visualizar la creación y ejecución activa de 4 contenedores.
    
    <img width="1326" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/20799651/2722c756-1fc5-4401-a884-8650fb12b6e6">
+   <img width="566" alt="image" src="https://github.com/sneiderV/cloud_conversion_tool/assets/105640955/23d345ee-fa35-4bb6-b9a7-4a5a348b87d9">
+
 
 9. En el folder `/collections` se encuentrar dos archivos `.json` que puede importar directamente en la aplicación Postman.
 
