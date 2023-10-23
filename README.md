@@ -81,7 +81,7 @@ ______
 
 ## 📽️ Demostración de la aplicación
 
-* [Demostración de la aplicación aquí](https://www.canva.com/design/DAFx3poFmkc/CdUHNyewScI0eBimbfxxjg/edit?utm_content=DAFx3poFmkc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+* [Video](https://github-production-user-asset-6210df.s3.amazonaws.com/105640955/277205591-fcb3ced8-5f55-4b8c-8655-a3b7ef34d5ac.mp4)
 
 ## 🧪 Plan de pruebas
 
