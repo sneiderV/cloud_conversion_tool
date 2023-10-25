@@ -34,6 +34,9 @@ def obtener_formato_archivo(ruta_archivo):
         else:
             return "Desconocido"  # Si no se encuentra una extensión
 
+class VistaPing(Resource):
+    def get(self):
+            return "Pong"
 
 class VistaSignIn(Resource):
 
