@@ -1,1 +1,0 @@
-Folder usign to save CONVERTED resources
