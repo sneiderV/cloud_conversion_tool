@@ -14,7 +14,7 @@ from modelos import Usuario, Task, TaskSchema, File, Status
 
 task_schema = TaskSchema()
 
-celery = Celery(__name__, broker='redis://redis:6379/0')
+celery = Celery(__name__, broker='redis://10.128.0.9:6379/0')
 
 def check_email(texto):
     # Definimos una expresión regular para validar direcciones de correo electrónico
