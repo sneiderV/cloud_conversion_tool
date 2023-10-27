@@ -7,7 +7,7 @@ import psycopg2
 from config import SQLALCHEMY_DATABASE_URI
 
 
-celery_app = Celery("process_task_converter", broker='redis://redis:6379/0')
+celery_app = Celery("process_task_converter", broker='redis://10.128.0.9:6379/0')
 
 def convertir_video(fileName, newFormat, task_id, user_id):
     try:
