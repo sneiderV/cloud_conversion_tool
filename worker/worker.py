@@ -22,9 +22,7 @@ def subirVideoOriginalBucket(file_name):
 
     # Create a new blob and upload the file's content.
     blob = bucket.blob("files/original/"+file_name)
-    blob.upload_from_filename(file_name)
-
-    os.remove("/app/files/original/"+file_name)
+    blob.upload_from_filename("/app/files/base/video1.mp4")
     
 
 def subirVideoConvertidoBucket(output_video_path, output_filename):
@@ -39,9 +37,6 @@ def subirVideoConvertidoBucket(output_video_path, output_filename):
     # Create a new blob and upload the file's content.
     blob = bucket.blob("files/converted/"+output_filename)
     blob.upload_from_filename(output_video_path)
-    
-    # Make the blob public. 
-    #blob.make_public()
     
     os.remove(output_video_path)
     
