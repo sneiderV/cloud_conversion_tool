@@ -10,6 +10,44 @@ from google.cloud import storage
 
 celery_app = Celery("process_task_converter", broker='redis://redis:6379/0')
 
+
+def subirVideoOriginalBucket(file_name):
+    CLOUD_STORAGE_BUCKET = "cloud-conversion-tool-bucket-g8"
+        
+    # Create a Cloud Storage client.
+    gcs = storage.Client()
+
+    # Get the bucket that the file will be uploaded to.
+    bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
+
+    # Create a new blob and upload the file's content.
+    blob = bucket.blob("files/original/"+file_name)
+    blob.upload_from_filename(file_name)
+
+    os.remove("/app/files/original/"+file_name)
+    
+
+def subirVideoConvertidoBucket(output_video_path, output_filename):
+    CLOUD_STORAGE_BUCKET = "cloud-conversion-tool-bucket-g8"
+        
+    # Create a Cloud Storage client.
+    gcs = storage.Client()
+
+    # Get the bucket that the file will be uploaded to.
+    bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
+
+    # Create a new blob and upload the file's content.
+    blob = bucket.blob("files/converted/"+output_filename)
+    blob.upload_from_filename(output_video_path)
+    
+    # Make the blob public. 
+    #blob.make_public()
+    
+    os.remove(output_video_path)
+    
+    return blob
+
+
 def convertir_video(fileName, newFormat, task_id, user_id):
     try:
         codec_dic = {"avi":"rawvideo","mp4":"libx264","webm":"libvpx","mpeg":"mpeg2video","wmv":"wmv2"}
@@ -17,42 +55,24 @@ def convertir_video(fileName, newFormat, task_id, user_id):
         input_dir, input_filename = os.path.split(fileName)
         print("input dir {}".format(input_dir))
               
-        # Copiar el archivo
+        # Extraer nombre archivo original con el formato => nombre_archivo_idtarea_idusuario.extensionoroginal
         file_name_extension = os.path.splitext(input_filename)[1]
         file_name_original = os.path.splitext(input_filename)[0] + f'_{task_id}' + f'_{user_id}' + f'{file_name_extension}'
         
-        shutil.copyfile(fileName, "/app/files/original/"+file_name_original)
-
+        subirVideoOriginalBucket(file_name_original)
+        
         output_filename = os.path.splitext(input_filename)[0]+ f'_{task_id}' + f'_{user_id}' + f'.{newFormat}'
         output_video_path = os.path.join("/app/files/converted/", output_filename) 
         
-        print("output path{}".format(output_video_path))
-        
         video = VideoFileClip(fileName)
         video.write_videofile(output_video_path, codec=codec_dic[newFormat])
-        
-        #####################
-        CLOUD_STORAGE_BUCKET = "cloud-conversion-tool-bucket-g8"
-        
-        # Create a Cloud Storage client.
-        gcs = storage.Client()
 
-        # Get the bucket that the file will be uploaded to.
-        bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
-
-        # Create a new blob and upload the file's content.
-        blob = bucket.blob("files/converted/"+output_filename)
-        blob.upload_from_filename(output_video_path)
-        
-        # Make the blob public. 
-        #blob.make_public()
-        
-        os.remove(output_video_path)
+        blob = subirVideoConvertidoBucket(output_video_path, output_filename)
 
         new_status = "PROCESSED"
-        update_task_status(task_id,new_status,output_video_path)
+        update_task_status(task_id,new_status,blob.public_url)
         
-        return f'Conversión exitosa. El video se ha guardado en {output_video_path} - {blob.public_url}'
+        return f'Conversión exitosa. El video se ha guardado en {blob.public_url}'
     except Exception as e:
         return f'Error al convertir el video: {str(e)}'
 
