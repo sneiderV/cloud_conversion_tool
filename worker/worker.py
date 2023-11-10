@@ -32,9 +32,7 @@ def convertir_video(fileName, newFormat, task_id, user_id):
         video.write_videofile(output_video_path, codec=codec_dic[newFormat])
         
         #####################
-        CLOUD_STORAGE_BUCKET = "gs://cloud-conversion-tool-bucket-g8"
-        
-        uploaded_file = VideoFileClip(fileName)
+        CLOUD_STORAGE_BUCKET = "cloud-conversion-tool-bucket-g8"
         
         # Create a Cloud Storage client.
         gcs = storage.Client()
@@ -43,13 +41,9 @@ def convertir_video(fileName, newFormat, task_id, user_id):
         bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
 
         # Create a new blob and upload the file's content.
-        blob = bucket.blob(uploaded_file.filename)
-
-        blob.upload_from_string(
-            uploaded_file.read(),
-            content_type=uploaded_file.content_type
-        )
-
+        blob = bucket.blob("files/readme.txt")
+        blob.upload_from_filename("/app/cct/files/original/readme.txt")
+        
         # Make the blob public. This is not necessary if the
         # entire bucket is public.
         # See https://cloud.google.com/storage/docs/access-control/making-data-public.
