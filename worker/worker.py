@@ -8,7 +8,7 @@ from config import SQLALCHEMY_DATABASE_URI, CLOUD_STORAGE_BUCKET
 from google.cloud import storage
 
 
-celery_app = Celery("process_task_converter", broker='redis://redis:6379/0')
+celery_app = Celery("process_task_converter", broker='redis://10.128.0.21:6379/0')
 
 
 def subirVideoOriginalBucket(file_name):
