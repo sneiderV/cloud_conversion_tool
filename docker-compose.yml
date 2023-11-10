@@ -1,34 +1,5 @@
 version: "3.8"
-services: 
-  conversion-tool-api:
-    restart: always
-    build:
-      context: ./conversion_app
-    container_name: conversion_tool_api_app
-    networks:
-      - web_net
-    ports:
-     - "9876:9876"
-    volumes:
-      - ./cct/files:/app/files
-    depends_on: 
-      - db
-      - redis
-
-  db: 
-    container_name: conversion_tool_pg_db
-    environment: 
-      POSTGRES_USER: admin_db
-      POSTGRES_PASSWORD: admin_conversion_tool_db
-      POSTGRES_DB: conversion_db
-    image: "postgres:latest"
-    networks:
-      - web_net
-    ports: 
-      - "5432:5432"
-    volumes: 
-      - ${PWD}/postgres-data:/var/lib/postgresql/data
-  
+services:   
   redis:
     restart: unless-stopped
     image: redis:7.0.5-alpine 
@@ -52,7 +23,3 @@ services:
 networks:
     web_net:
         driver: bridge
-
-volumes: 
-  pg-data: 
-    driver: local
