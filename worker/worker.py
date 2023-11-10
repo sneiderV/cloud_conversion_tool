@@ -41,20 +41,16 @@ def convertir_video(fileName, newFormat, task_id, user_id):
         bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
 
         # Create a new blob and upload the file's content.
-        blob = bucket.blob("files/readme.txt")
-        blob.upload_from_filename("/app/cct/files/original/readme.txt")
+        blob = bucket.blob("files/converted/"+output_filename)
+        blob.upload_from_filename(output_video_path)
         
-        # Make the blob public. This is not necessary if the
-        # entire bucket is public.
-        # See https://cloud.google.com/storage/docs/access-control/making-data-public.
+        # Make the blob public. 
         blob.make_public()
-
-        # The public URL can be used to directly access the uploaded file via HTTP.
-        logging.info(blob.public_url) 
+        
+        os.remove(output_video_path)
 
         new_status = "PROCESSED"
-        update = update_task_status(task_id,new_status,output_video_path)
-        logging.info(update)
+        update_task_status(task_id,new_status,output_video_path)
         
         return f'Conversión exitosa. El video se ha guardado en {output_video_path} - {blob.public_url}'
     except Exception as e:
