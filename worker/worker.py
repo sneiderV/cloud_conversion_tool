@@ -45,7 +45,7 @@ def convertir_video(fileName, newFormat, task_id, user_id):
         blob.upload_from_filename(output_video_path)
         
         # Make the blob public. 
-        blob.make_public()
+        #blob.make_public()
         
         os.remove(output_video_path)
 
