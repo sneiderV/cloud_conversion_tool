@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 # Set environment variables
     
 #CMD ["celery", "-A", "worker", "worker", "-l", "info", "-Q", "process_task_converter"]
-CMD ["python", "subscriber_script.py"]
+CMD ["python", "worker.py"]
