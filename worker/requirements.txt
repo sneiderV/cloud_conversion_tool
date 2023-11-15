@@ -1,5 +1,6 @@
 celery==4.4.7
 google-cloud-storage==2.1.0
+google-cloud-pubsub==2.18.4
 psycopg2-binary==2.9.5
 redis==4.3.6
 moviepy==1.0.3

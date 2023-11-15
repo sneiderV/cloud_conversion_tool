@@ -4,7 +4,7 @@ from celery import Celery
 from moviepy.editor import VideoFileClip
 import os
 import psycopg2
-from config import SQLALCHEMY_DATABASE_URI, CLOUD_STORAGE_BUCKET
+from config import SQLALCHEMY_DATABASE_URI, GCP_CLOUD_STORAGE_BUCKET
 from google.cloud import storage
 
 
@@ -17,7 +17,7 @@ def subirVideoOriginalBucket(file_name):
     gcs = storage.Client()
 
     # Get the bucket that the file will be uploaded to.
-    bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
+    bucket = gcs.get_bucket(GCP_CLOUD_STORAGE_BUCKET)
 
     # Create a new blob and upload the file's content.
     blob = bucket.blob("files/original/"+file_name)
@@ -30,7 +30,7 @@ def subirVideoConvertidoBucket(output_video_path, output_filename):
     gcs = storage.Client()
 
     # Get the bucket that the file will be uploaded to.
-    bucket = gcs.get_bucket(CLOUD_STORAGE_BUCKET)
+    bucket = gcs.get_bucket(GCP_CLOUD_STORAGE_BUCKET)
 
     # Create a new blob and upload the file's content.
     blob = bucket.blob("files/converted/"+output_filename)

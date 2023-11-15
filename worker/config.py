@@ -14,4 +14,6 @@ JWT_SECRET_KEY = OUR_JWTSECRET
 SECRET_KEY = OUR_SECRET
 PROPAGATE_EXCEPTIONS = True
 
-CLOUD_STORAGE_BUCKET="cloud-conversion-tool-bucket-g8"
+GCP_CLOUD_STORAGE_BUCKET = "cloud-conversion-tool-bucket-g8"
+GCP_PROJECT_ID = "mystical-ship-403002"
+GCP_TOPIC_ID = "topic-cct"

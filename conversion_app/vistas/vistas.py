@@ -5,16 +5,18 @@ from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identi
 from flask_restful import Resource
 import hashlib
 import re
-from celery import Celery
+#from celery import Celery
 import datetime
 
+from instance.config import GCP_PROJECT_ID, GCP_TOPIC_ID
+from google.cloud import pubsub_v1
 from app import db
 from modelos import Usuario, Task, TaskSchema, File, Status
 
 
 task_schema = TaskSchema()
 
-celery = Celery(__name__, broker='redis://10.128.0.21:6379/0')
+#celery = Celery(__name__, broker='redis://10.128.0.21:6379/0')
 
 def check_email(texto):
     # Definimos una expresión regular para validar direcciones de correo electrónico
@@ -118,7 +120,8 @@ class VistaTasks(Resource):
         new_task = Task(idFile=new_file.id,status=status,uploadTime=upload_time,userId=current_user)
         db.session.add(new_task)
         db.session.commit()
-        send_task_to_process.apply_async(args=[new_task.id,file_name,new_format,new_task.userId], queue="process_task_converter")
+        #send_task_to_process.apply_async(args=[new_task.id,file_name,new_format,new_task.userId], queue="process_task_converter")
+        send_task_to_process(args=[new_task.id,file_name,new_format,new_task.userId])
 
         return "Su transaccion esta en proceso con el task_id: {}".format(new_task.id)
 
@@ -156,6 +159,21 @@ class VistaTask(Resource):
     
 
 
-@celery.task(name="convert_process")
+#@celery.task(name="convert_process")
 def send_task_to_process(*args):
+    logging.info(str(args))
+    publisher = pubsub_v1.PublisherClient()
+    # The `topic_path` method creates a fully qualified identifier
+    # in the form `projects/{project_id}/topics/{topic_id}`
+    topic_path = publisher.topic_path(GCP_PROJECT_ID, GCP_TOPIC_ID)
+    for n in range(1, 10):
+        data_str = f"Message number {n}"
+        # Data must be a bytestring
+        data = data_str.encode("utf-8")
+        # When you publish a message, the client returns a future.
+        future = publisher.publish(topic_path, data)
+        print(future.result())
+
+    print(f"Published messages to {topic_path}.")
+
     logging.info('### Enviando mensaje a la queue')
