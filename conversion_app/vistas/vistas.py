@@ -5,7 +5,6 @@ from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identi
 from flask_restful import Resource
 import hashlib
 import re
-#from celery import Celery
 import datetime
 
 from instance.config import GCP_PROJECT_ID, GCP_TOPIC_ID
@@ -15,8 +14,6 @@ from modelos import Usuario, Task, TaskSchema, File, Status
 
 
 task_schema = TaskSchema()
-
-#celery = Celery(__name__, broker='redis://10.128.0.21:6379/0')
 
 def check_email(texto):
     # Definimos una expresión regular para validar direcciones de correo electrónico
@@ -156,10 +153,6 @@ class VistaTask(Resource):
         else:
             return "La tarea no puede ser eliminada. Tarea en proceso."
     
-    
-
-
-#@celery.task(name="convert_process")
 def send_task_to_process(*args):
     args_str = ",".join(map(str, args))
     logging.info(args_str)
