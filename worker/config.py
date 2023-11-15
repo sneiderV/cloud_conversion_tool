@@ -16,4 +16,4 @@ PROPAGATE_EXCEPTIONS = True
 
 GCP_CLOUD_STORAGE_BUCKET = "cloud-conversion-tool-bucket-g8"
 GCP_PROJECT_ID = "mystical-ship-403002"
-GCP_TOPIC_ID = "topic-cct"
+GCP_SUB_TOPIC_ID = "topic-cct-sub"

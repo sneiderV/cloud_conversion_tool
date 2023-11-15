@@ -1,15 +1,31 @@
 import logging
 import shutil
-from celery import Celery
 from moviepy.editor import VideoFileClip
 import os
 import psycopg2
-from config import SQLALCHEMY_DATABASE_URI, GCP_CLOUD_STORAGE_BUCKET
-from google.cloud import storage
+from config import SQLALCHEMY_DATABASE_URI, GCP_CLOUD_STORAGE_BUCKET, GCP_PROJECT_ID, GCP_SUB_TOPIC_ID
+from google.cloud import storage, pubsub_v1
 
+subscriber = pubsub_v1.SubscriberClient()
+subscription_path = subscriber.subscription_path(GCP_PROJECT_ID, GCP_SUB_TOPIC_ID)
 
-celery_app = Celery("process_task_converter", broker='redis://10.128.0.21:6379/0')
+def callback(message):
+    message = message.data.decode('utf-8')
+    print(f"Received message: {message}")
+    # order input: task_id, fileName, newFormat, user_id
+    params = message.split(",")
+    conversion_status = convertir_video(params[1],params[2],params[0],params[3])
+    logging.info(conversion_status)
+    message.ack()
 
+streaming_pull_future = subscriber.subscribe(subscription_path, callback=callback)
+print(f"Listening for messages on {subscription_path}...\n")
+
+with subscriber:
+    try:
+        streaming_pull_future.result()
+    except KeyboardInterrupt:
+        streaming_pull_future.cancel()
 
 def subirVideoOriginalBucket(file_name):
         
@@ -80,15 +96,4 @@ def update_task_status(task_id, new_status,output_video_path):
         return "Se actualizo el estado de la tarea a {}".format(new_status)
     except Exception as e:
         return f'Error al actualizar el status: {str(e)}'
-
-
-
-
-@celery_app.task(name='convert_process')
-def convert_process(task_id, fileName, newFormat, user_id):
-    logging.info("PROCESSING TASK WITH ID "+ str(task_id))
-    conversion_status = convertir_video(fileName,newFormat,task_id,user_id)
-    logging.info(conversion_status)
     
-    
-
