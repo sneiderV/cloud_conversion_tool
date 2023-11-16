@@ -118,7 +118,7 @@ class VistaTasks(Resource):
         db.session.add(new_task)
         db.session.commit()
         #send_task_to_process.apply_async(args=[new_task.id,file_name,new_format,new_task.userId], queue="process_task_converter")
-        send_task_to_process(args=[new_task.id,file_name,new_format,new_task.userId])
+        send_task_to_process(f'{str(new_task.id)},{file_name},{new_format},{str(new_task.userId)}')
 
         return "Su transaccion esta en proceso con el task_id: {}".format(new_task.id)
 
