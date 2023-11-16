@@ -80,11 +80,11 @@ def update_task_status(task_id, new_status,output_video_path):
         return f'Error al actualizar el status: {str(e)}'
 
 def callback(message):
-    message = message.data.decode('utf-8')
-    print(f"Received message: {message}")
+    decoded_message = message.data.decode('utf-8')
+    print(f"Received message: {decoded_message}")
     # order input: task_id, fileName, newFormat, user_id
-    params = message.split(",")
-    conversion_status = convertir_video(params[1],params[2],params[0],params[3])
+    params = decoded_message.split(",")
+    conversion_status = convertir_video(params[1], params[2], params[0], params[3])
     logging.info(conversion_status)
     message.ack()
 
