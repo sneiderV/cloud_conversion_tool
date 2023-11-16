@@ -1,14 +1,5 @@
 version: "3.8"
 services:   
-  redis:
-    restart: unless-stopped
-    image: redis:7.0.5-alpine 
-    networks:
-      - web_net
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning 
-
   worker:
     build:
       context: ./worker
@@ -17,8 +8,6 @@ services:
       - web_net
     volumes:
       - ./cct/files:/app/files
-    depends_on: 
-      - redis  
 
 networks:
     web_net:

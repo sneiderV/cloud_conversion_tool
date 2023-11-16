@@ -6,21 +6,24 @@ import psycopg2
 from config import SQLALCHEMY_DATABASE_URI, GCP_CLOUD_STORAGE_BUCKET, GCP_PROJECT_ID, GCP_SUB_TOPIC_ID
 from google.cloud import storage, pubsub_v1
 
+logging.basicConfig(level=logging.INFO)
+
 subscriber = pubsub_v1.SubscriberClient()
 subscription_path = subscriber.subscription_path(GCP_PROJECT_ID, GCP_SUB_TOPIC_ID)
 
 def subirVideoOriginalBucket(file_name):
-        
-    # Create a Cloud Storage client.
-    gcs = storage.Client()
+    try:    
+        # Create a Cloud Storage client.
+        gcs = storage.Client()
 
-    # Get the bucket that the file will be uploaded to.
-    bucket = gcs.get_bucket(GCP_CLOUD_STORAGE_BUCKET)
+        # Get the bucket that the file will be uploaded to.
+        bucket = gcs.get_bucket(GCP_CLOUD_STORAGE_BUCKET)
 
-    # Create a new blob and upload the file's content.
-    blob = bucket.blob("files/original/"+file_name)
-    blob.upload_from_filename("/app/files/base/video1.mp4")
-    
+        # Create a new blob and upload the file's content.
+        blob = bucket.blob("files/original/"+file_name)
+        blob.upload_from_filename("/app/files/base/video1.mp4")
+    except Exception as e:
+        logging.error(f'Error en subirVideoOriginalBucket: {str(e)}')
 
 def subirVideoConvertidoBucket(output_video_path, output_filename):
         
