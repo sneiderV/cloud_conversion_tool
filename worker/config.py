@@ -1,5 +1,5 @@
 
-OUR_HOST="104.155.157.86"
+OUR_HOST="35.202.254.125"
 OUR_DB="conversion_db"
 OUR_USER="admin_db"
 OUR_PORT="5432"

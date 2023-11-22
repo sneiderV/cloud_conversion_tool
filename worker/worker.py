@@ -1,15 +1,17 @@
 import logging
 import shutil
+import base64
 from moviepy.editor import VideoFileClip
 import os
 import psycopg2
-from config import SQLALCHEMY_DATABASE_URI, GCP_CLOUD_STORAGE_BUCKET, GCP_PROJECT_ID, GCP_SUB_TOPIC_ID
-from google.cloud import storage, pubsub_v1
+from config import SQLALCHEMY_DATABASE_URI, GCP_CLOUD_STORAGE_BUCKET
+from google.cloud import storage
+from flask import Flask
+from flask import request
 
 logging.basicConfig(level=logging.INFO)
 
-subscriber = pubsub_v1.SubscriberClient()
-subscription_path = subscriber.subscription_path(GCP_PROJECT_ID, GCP_SUB_TOPIC_ID)
+app = Flask(__name__)
 
 def subirVideoOriginalBucket(file_name):
     try:    
@@ -82,20 +84,22 @@ def update_task_status(task_id, new_status,output_video_path):
     except Exception as e:
         return f'Error al actualizar el status: {str(e)}'
 
-def callback(message):
-    decoded_message = message.data.decode('utf-8')
-    print(f"Received message: {decoded_message}")
-    # order input: task_id, fileName, newFormat, user_id
+@app.route("/",methods=['POST'])
+def recived():
+    req = request.get_json()
+    print(str(req))
+    m_encode = req['message']['data']
+    decoded_message = base64.b64decode(m_encode).decode('utf-8')
+    print(f"Received message decode: {decoded_message}")
     params = decoded_message.split(",")
     conversion_status = convertir_video(params[1], params[2], params[0], params[3])
     logging.info(conversion_status)
-    message.ack()
+    return f"Received: {req}!"
 
-streaming_pull_future = subscriber.subscribe(subscription_path, callback=callback)
-print(f"Listening for messages on {subscription_path}...\n")
+@app.route("/",methods=['GET'])
+def ping():
+    return "Worker Pong!"
 
-with subscriber:
-    try:
-        streaming_pull_future.result()
-    except KeyboardInterrupt:
-        streaming_pull_future.cancel()
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

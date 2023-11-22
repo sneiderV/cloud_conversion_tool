@@ -14,4 +14,9 @@ RUN pip install -r requirements.txt
 # Set environment variables
     
 #CMD ["celery", "-A", "worker", "worker", "-l", "info", "-Q", "process_task_converter"]
-CMD ["python", "worker.py"]
+#CMD ["python", "worker.py"]
+
+EXPOSE 8080
+
+# Define the command to run the Flask development server
+CMD ["flask", "run", "--host=0.0.0.0", "-p 8080"]
