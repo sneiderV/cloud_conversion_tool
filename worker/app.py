@@ -1,5 +1,4 @@
 import logging
-import shutil
 import base64
 from moviepy.editor import VideoFileClip
 import os
@@ -23,7 +22,7 @@ def subirVideoOriginalBucket(file_name):
 
         # Create a new blob and upload the file's content.
         blob = bucket.blob("files/original/"+file_name)
-        blob.upload_from_filename("/app/files/base/video1.mp4")
+        blob.upload_from_filename("./files/base/video1.mp4")
     except Exception as e:
         logging.error(f'Error en subirVideoOriginalBucket: {str(e)}')
 
