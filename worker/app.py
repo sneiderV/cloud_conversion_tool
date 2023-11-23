@@ -57,7 +57,7 @@ def convertir_video(fileName, newFormat, task_id, user_id):
         subirVideoOriginalBucket(file_name_original)
         
         output_filename = os.path.splitext(input_filename)[0]+ f'_{task_id}' + f'_{user_id}' + f'.{newFormat}'
-        output_video_path = os.path.join("/files/converted/", output_filename) 
+        output_video_path = os.path.join("./files/converted/", output_filename) 
         
         video = VideoFileClip(fileName)
         video.write_videofile(output_video_path, codec=codec_dic[newFormat])
