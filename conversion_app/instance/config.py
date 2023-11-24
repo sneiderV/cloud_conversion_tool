@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-OUR_HOST=os.getenv("DB_HOST", "35.202.254.125")
+OUR_HOST=os.getenv("DB_HOST", "34.41.67.239")
 OUR_DB=os.getenv("DB_DB", "conversion_db")
 OUR_USER=os.getenv("DB_USER", "admin_db")
 OUR_PORT=os.getenv("DB_PORT", "5432")
